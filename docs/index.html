@@ -3,42 +3,73 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AI 新闻雷达 · 实时聚合</title>
-<meta name="description" content="聚合多个免费 API / RSS 源的实时 AI 资讯面板" />
+<title>AI 新闻雷达 · 每日 AI 情报</title>
+<meta name="description" content="聚合多个免费 API / RSS 源的实时 AI 资讯，像一份每日科技刊。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Archivo:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="logo">◎</span>
-      <div>
-        <h1>AI 新闻雷达</h1>
-        <p class="sub">聚合多个免费 API / RSS 源的实时 AI 资讯</p>
+<div class="paper">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="kicker">AI INTELLIGENCE&nbsp;&nbsp;·&nbsp;&nbsp;每日情报</span>
+      <span class="dateline" id="dateline">—</span>
+    </div>
+
+    <div class="brandrow">
+      <h1 class="wordmark">AI 新闻雷达</h1>
+      <div class="controls">
+        <label class="search">
+          <span class="search-label">检索</span>
+          <input id="search" type="search" placeholder="标题或来源…" autocomplete="off" />
+        </label>
+        <button id="refresh" class="btn" type="button">刷新</button>
+        <label class="auto"><input type="checkbox" id="auto" checked /><span>自动</span></label>
       </div>
     </div>
-    <div class="actions">
-      <div class="searchbox">
-        <input id="search" type="search" placeholder="搜索标题 / 来源…" autocomplete="off" />
-      </div>
-      <button id="refresh" class="btn">↻ 刷新</button>
-      <label class="auto"><input type="checkbox" id="auto" checked /> 自动刷新</label>
-    </div>
+
+    <div class="rule-thick"></div>
+    <nav class="sections" id="filters" aria-label="按来源筛选"></nav>
+    <div class="rule"></div>
   </header>
 
-  <section class="stats" id="stats"></section>
-
-  <nav class="filters" id="filters"></nav>
-
   <main>
-    <div id="grid" class="grid"></div>
-    <p id="empty" class="empty" hidden>没有匹配的新闻 🙈</p>
+    <section class="lead" id="lead" aria-label="头条"></section>
+
+    <div class="columns">
+      <section class="stream-wrap">
+        <h2 class="sechead"><span id="streamLabel">最新动态</span><span class="sechead-count" id="streamCount"></span></h2>
+        <ol class="stream" id="grid"></ol>
+        <p id="empty" class="empty" hidden>没有匹配的条目。</p>
+      </section>
+
+      <aside class="rail" aria-label="侧栏">
+        <div class="rail-block">
+          <h3 class="railhead">本期概览</h3>
+          <div id="stats" class="stats"></div>
+        </div>
+        <div class="rail-block">
+          <h3 class="railhead">数据源状态</h3>
+          <div id="sources" class="sources"></div>
+        </div>
+        <div class="rail-block">
+          <h3 class="railhead">关于</h3>
+          <p class="railnote">聚合 10 个免费 API / RSS 源，由 GitHub Actions 每 30 分钟自动刷新。仅供学习演示。</p>
+          <p class="railnote railnote-dim" id="updated">—</p>
+        </div>
+      </aside>
+    </div>
   </main>
 
-  <footer class="foot">
-    <div id="sources" class="sources"></div>
-    <p class="meta"><span id="updated">—</span> · 数据来自公开免费 API，由 GitHub Actions 定时刷新，仅供学习演示</p>
+  <footer class="colophon">
+    <div class="rule"></div>
+    <p><strong>AI 新闻雷达</strong> · 公开免费数据 · 构建于 GitHub Pages</p>
   </footer>
 
-  <script src="./app.js"></script>
+</div>
+<script src="./app.js"></script>
 </body>
 </html>
