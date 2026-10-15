@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI 新闻雷达 · 实时聚合</title>
+<meta name="description" content="聚合多个免费 API / RSS 源的实时 AI 资讯面板" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">◎</span>
+      <div>
+        <h1>AI 新闻雷达</h1>
+        <p class="sub">聚合多个免费 API / RSS 源的实时 AI 资讯</p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="searchbox">
+        <input id="search" type="search" placeholder="搜索标题 / 来源…" autocomplete="off" />
+      </div>
+      <button id="refresh" class="btn">↻ 刷新</button>
+      <label class="auto"><input type="checkbox" id="auto" checked /> 自动刷新</label>
+    </div>
+  </header>
+
+  <section class="stats" id="stats"></section>
+
+  <nav class="filters" id="filters"></nav>
+
+  <main>
+    <div id="grid" class="grid"></div>
+    <p id="empty" class="empty" hidden>没有匹配的新闻 🙈</p>
+  </main>
+
+  <footer class="foot">
+    <div id="sources" class="sources"></div>
+    <p class="meta"><span id="updated">—</span> · 数据来自公开免费 API，由 GitHub Actions 定时刷新，仅供学习演示</p>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>

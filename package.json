@@ -1,0 +1,11 @@
+{
+  "name": "ai-news-radar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "聚合多个免费 API / RSS 源的 AI 资讯面板（GitHub Pages 静态部署）",
+  "scripts": {
+    "build": "node scripts/build-data.js",
+    "dev": "node server.js 8790"
+  },
+  "engines": { "node": ">=18" }
+}
