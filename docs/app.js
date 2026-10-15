@@ -130,8 +130,10 @@ function render() {
     streamCount.textContent = `${list.length} 条`;
     grid.innerHTML = list.map(streamItem).join('');
   } else {
-    leadCard(list[0]);
-    const rest = list.slice(1);
+    // 头条选“有可用摘要的最新一条”，保证头版下方有导语
+    const lead = list.find((it) => it.summary && it.summary.length >= 40) || list[0];
+    leadCard(lead);
+    const rest = list.filter((it) => it !== lead);
     streamLabel.textContent = '最新动态';
     streamCount.textContent = `${rest.length} 条`;
     grid.innerHTML = rest.map(streamItem).join('');
