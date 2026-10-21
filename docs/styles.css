@@ -146,10 +146,11 @@ a{color:inherit;text-decoration:none}
 .railhead{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
   color:var(--ink);margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
 .stats{display:grid;gap:14px}
-.stat{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.stat b{font-family:var(--display);font-weight:900;font-size:34px;line-height:1;
-  font-variant-numeric:tabular-nums;white-space:nowrap}
-.stat span{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:right}
+.stat{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:nowrap}
+.stat b{font-family:var(--display);font-weight:900;font-size:32px;line-height:1;
+  font-variant-numeric:tabular-nums;white-space:nowrap;flex:0 0 auto;min-width:max-content}
+.stat span{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);text-align:right;flex:1 1 auto;min-width:0}
 
 .sources{display:grid;gap:9px}
 .srcrow{display:flex;align-items:center;gap:9px;font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--ink-2)}
