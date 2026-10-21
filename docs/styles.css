@@ -147,7 +147,8 @@ a{color:inherit;text-decoration:none}
   color:var(--ink);margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
 .stats{display:grid;gap:14px}
 .stat{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.stat b{font-family:var(--display);font-weight:900;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.stat b{font-family:var(--display);font-weight:900;font-size:34px;line-height:1;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
 .stat span{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:right}
 
 .sources{display:grid;gap:9px}
