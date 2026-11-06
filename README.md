@@ -12,8 +12,9 @@ docs/                 部署产物（GitHub Pages 源 = main 分支 /docs）
   index.html          首页
   enn.html            新奥集团专题页
   styles.css          共用样式（编辑部杂志风）
-  app.js              首页逻辑
-  enn.js              专题页逻辑
+  page.js             首页与专题页共用的列表、检索、刷新
+  app.js              首页：栏目名与侧栏文案
+  enn.js              专题页：媒体名与侧栏文案
   data.json           AI 资讯数据（构建产物）
   enn-data.json       新奥专题数据（构建产物）
 lib/aggregate.js      聚合核心：抓取、解析、去重、排序
