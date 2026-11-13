@@ -95,6 +95,26 @@ a{color:inherit;text-decoration:none}
 .tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:var(--accent)}
 .rule{height:1px;background:var(--rule);opacity:.3}
 
+/* 报头离线提示：贴在栏目下、头条前。全部在线时不占位。 */
+.source-cue{padding:2px 0 10px}
+.source-cue-btn{
+  display:flex;align-items:center;gap:8px;width:fit-content;max-width:100%;
+  margin:0;padding:2px 0;border:0;background:none;cursor:pointer;
+  font-family:var(--sans);text-align:left;color:var(--ink)}
+.source-cue-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.source-cue-count{
+  font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--accent);
+  white-space:nowrap;flex:none}
+.source-cue-names{
+  font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--ink-2);
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.source-cue-go{
+  font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--ink);
+  border-bottom:1px solid var(--ink);white-space:nowrap;flex:none;padding-bottom:1px}
+.source-cue-btn:hover .source-cue-go,
+.source-cue-btn:focus-visible .source-cue-go{color:var(--accent);border-bottom-color:var(--accent)}
+.source-cue-btn:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
+
 /* ---------------------------- 头条 ---------------------------- */
 .lead{padding:34px 0 30px;border-bottom:1px solid rgba(25,21,18,.35)}
 .lead-card{display:grid;grid-template-columns:1fr;gap:18px}
