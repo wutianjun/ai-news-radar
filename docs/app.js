@@ -7,6 +7,7 @@ const emptyEl = $('#empty');
 const filtersEl = $('#filters');
 const statsEl = $('#stats');
 const sourcesEl = $('#sources');
+const sourceCueEl = $('#sourceCue');
 const updatedEl = $('#updated');
 const streamLabel = $('#streamLabel');
 const streamCount = $('#streamCount');
@@ -66,11 +67,75 @@ function renderStats() {
     <div class="stat"><b>${now}</b><span>近 1 小时</span></div>`;
 }
 
+function offlineSourceNames(sources) {
+  const names = [];
+  const seen = new Set();
+  for (const s of sources) {
+    if (s.ok) continue;
+    const name = String(s.name || s.id || '未命名').trim() || '未命名';
+    if (seen.has(name)) continue;
+    seen.add(name);
+    names.push(name);
+  }
+  return names;
+}
+
+function renderSourceCue(sources) {
+  if (!sourceCueEl) return;
+  const list = Array.isArray(sources) ? sources : [];
+  const badCount = list.filter((s) => !s.ok).length;
+  const names = offlineSourceNames(list);
+  if (!badCount) {
+    sourceCueEl.hidden = true;
+    sourceCueEl.innerHTML = '';
+    delete sourceCueEl.dataset.sig;
+    return;
+  }
+  const sig = badCount + ':' + names.join('\n');
+  if (sourceCueEl.dataset.sig === sig && !sourceCueEl.hidden) return;
+  sourceCueEl.dataset.sig = sig;
+  const countText = badCount + ' 源离线';
+  const nameText = names.join('、');
+  sourceCueEl.hidden = false;
+  sourceCueEl.innerHTML = `
+    <button type="button" class="source-cue-btn" aria-controls="sources" title="${esc(nameText)}"
+      aria-label="${esc(countText)}：${esc(nameText)}。转到数据源状态">
+      <span class="source-cue-dot" aria-hidden="true"></span>
+      <span class="source-cue-count">${esc(countText)}</span>
+      <span class="source-cue-names">${esc(nameText)}</span>
+      <span class="source-cue-go">查看 →</span>
+    </button>`;
+}
+
 function renderSources() {
-  sourcesEl.innerHTML = DATA.sources.map((s) => `
+  const sources = Array.isArray(DATA.sources) ? DATA.sources : [];
+  sourcesEl.innerHTML = sources.map((s) => `
     <div class="srcrow ${s.ok ? 'ok' : 'bad'}" title="${esc(s.error || '')}">
       <span class="dot"></span><span>${esc(s.name)}</span><span class="cnt">${s.ok ? s.count : '离线'}</span>
     </div>`).join('');
+  renderSourceCue(sources);
+}
+
+function revealSources() {
+  if (!sourcesEl) return;
+  const block = sourcesEl.closest('.rail-block') || sourcesEl;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const top = Math.max(0, block.getBoundingClientRect().top + window.scrollY - 12);
+  if (reduce || Math.abs(top - window.scrollY) < 2) {
+    window.scrollTo(0, top);
+    return;
+  }
+  const start = window.scrollY;
+  const dist = top - start;
+  const dur = 480;
+  const t0 = performance.now();
+  const step = (now) => {
+    const p = Math.min(1, (now - t0) / dur);
+    const e = 1 - Math.pow(1 - p, 3);
+    window.scrollTo(0, start + dist * e);
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
 }
 
 function leadCard(it) {
@@ -157,6 +222,12 @@ async function load(refresh = false) {
   }
 }
 
+if (sourceCueEl) {
+  sourceCueEl.addEventListener('click', (e) => {
+    if (!e.target.closest('.source-cue-btn')) return;
+    revealSources();
+  });
+}
 filtersEl.addEventListener('click', (e) => {
   const t = e.target.closest('.tab');
   if (!t) return;
